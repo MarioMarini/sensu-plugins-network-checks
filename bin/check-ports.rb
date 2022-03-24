@@ -74,6 +74,8 @@ class CheckPort < Sensu::Plugin::Check::CLI
     critical "Check failed to run: No route to host (#{host}:#{port})"
   rescue EOFError
     critical "Connection closed unexpectedly (#{host}:#{port})"
+  rescue SocketError
+    critical "Socket error (#{host}:#{port})"
   end
 
   def run
